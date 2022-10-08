@@ -16,7 +16,7 @@
             "request": "launch",
             "name": "MA3 Q2",
             "skipFiles": ["<node_internals>/**"],
-            "program": "${workspaceFolder}\\question-2.js"
+            "program": "${workspaceFolder}\\js\\question-2.js"
         }
     ]
 }

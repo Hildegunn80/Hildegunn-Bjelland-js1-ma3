@@ -38,22 +38,43 @@ Noroff Høyskole og Fagskole tilbyr studier på nett eller klasserom i Oslo, Ber
 console.log("Question 2");
 
 apiKey="1826b7910b474689a2d87f07163cd243";
+const url ="https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=-rating&key="+apiKey;
 
-const url ="https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=-rating&key=apiKey";
-const gamesResults= document.querySelector(".results");
-async function getResults(){
-    const response = await fetch (url);
-    const gameResult =await response.json();
-    const results =gameResult.all;
-    gamesResults.innerHTML="";
-    for (let i=0; i<results.length; i++){
-        console.log(results[i].name);
-        if(i===8){
-            break;
+const resultsDiv = document.querySelector(".results");
+
+async function getResults() {
+    console.log("Requesting API info...");
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+            return;
         }
-        gamesResults.innerHTML+=`<div class="result">${results[i].name}</div>`;
+        console.log("API response length: " + response.status);
+
+        let data = await response.json();
+        return data;
+    }
+    catch(error) {
+        console.log("Exception in getResults(): " + error);
     }
 }
 
-getResults()
+async function render() {
+    let data = await getResults();
+    console.log("Games JSON: " + data.count);
+    
+    for(let i=0;i<data.results.length;i++) {
+        console.log("Name: " + data.results[i].name);
+        console.log(" Rating: " + data.results[i].rating);
+        console.log(" Tags: " + data.results[i].tags.length);
 
+        if(i>=7) break;
+    }
+
+}
+
+// load menu automatically..
+render();
+//window.onload = render();
