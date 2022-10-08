@@ -1,11 +1,13 @@
+
 //function getRemainder(a,b) {
- //   return a % b;
-  //  }
+//   return a % b;
+//}
 
-    // Convert to an arrow function
+// Convert to an arrow function
+console.log("Oppgave 1:");
+
+const getRemainder = (a,b) => a % b;
+
+console.log("Reminder: " + getRemainder(20,4) );
 
 
-const getRemainder= (a,b) => a % b;
-log.getRemainder(20 % 4) 
-
-    
