@@ -6,6 +6,6 @@
 
 
 const getRemainder= (a,b) => a % b;
-log.getRemainder(20,4) 
+log.getRemainder(20 % 4) 
 
     
