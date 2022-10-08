@@ -37,7 +37,23 @@ Noroff Høyskole og Fagskole tilbyr studier på nett eller klasserom i Oslo, Ber
 
 console.log("Question 2");
 
-//1826b7910b474689a2d87f07163cd243
+apiKey="1826b7910b474689a2d87f07163cd243";
 
-const url ="https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=-rating&key=1826b7910b474689a2d87f07163cd243";
-const gamesResults=
+const url ="https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=-rating&key=apiKey";
+const gamesResults= document.querySelector(".results");
+async function getResults(){
+    const response = await fetch (url);
+    const gameResult =await response.json();
+    const results =gameResult.all;
+    gamesResults.innerHTML="";
+    for (let i=0; i<results.length; i++){
+        console.log(results[i].name);
+        if(i===8){
+            break;
+        }
+        gamesResults.innerHTML+=`<div class="result">${results[i].name}</div>`;
+    }
+}
+
+getResults()
+
