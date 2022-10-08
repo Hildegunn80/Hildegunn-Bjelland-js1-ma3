@@ -40,7 +40,7 @@ console.log("Question 2");
 apiKey="1826b7910b474689a2d87f07163cd243";
 const url ="https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=-rating&key="+apiKey;
 
-const resultsDiv = document.querySelector(".results");
+
 
 async function getResults() {
     console.log("Requesting API info...");
@@ -61,20 +61,31 @@ async function getResults() {
     }
 }
 
-async function render() {
+async function renderGames() {
+    const htmlDiv = document.querySelector(".results");
+
     let data = await getResults();
     console.log("Games JSON: " + data.count);
     
+
+    let html = "";
     for(let i=0;i<data.results.length;i++) {
         console.log("Name: " + data.results[i].name);
         console.log(" Rating: " + data.results[i].rating);
-        console.log(" Tags: " + data.results[i].tags.length);
+        console.log(" Tag counter: " + data.results[i].tags.length);
+
+        html += "Name: " + data.results[i].name + "<br>\n";
+        html += "Rating: " + data.results[i].rating + "<br>\n";
+        html += "Tag counte: " + data.results[i].name + "<br>\n";
+        html += "<br>"
 
         if(i>=7) break;
     }
 
+    htmlDiv.innerHTML = html;
+
+
 }
 
 // load menu automatically..
-render();
-//window.onload = render();
+window.onload = renderGames();
